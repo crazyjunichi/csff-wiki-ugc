@@ -1,0 +1,19 @@
+{{ define "main" }}
+    <article>
+        <h2>{{ .Title }}</h2>
+        {{ if .Date }}
+        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+            Published: {{ .Date.Format "January 2, 2006" }}
+        </time>
+        {{ end }}
+        <div>
+            {{ .Content }}
+        </div>
+    </article>
+    
+    {{ with .File }}
+    {{ if .Path }}
+        <a href="https://github.com/your-username/your-source-repo/edit/main/content/{{ .Path }}" target="_blank" rel="noopener">在 GitHub 上编辑此页</a>
+    {{ end }}
+    {{ end }}
+{{ end }}
