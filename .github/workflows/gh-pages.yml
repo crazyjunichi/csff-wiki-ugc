@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ] # 当向 main 分支推送时触发
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive # 如果主题是git子模块，需要这个
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest' # 使用最新版Hugo
+
+      - name: Build
+        run: hugo --minify # 构建并压缩
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          # 生成内容的仓库密钥
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          # 或者使用Personal Access Token
+          # personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          external_repository: crazyjunichi/csff-wiki-ugc.github.io # 你的Pages仓库
+          publish_dir: ./public # Hugo默认的输出目录
+          publish_branch: main # Pages仓库的分支，通常是main或gh-pages
