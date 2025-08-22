@@ -31,6 +31,6 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           # 或者使用Personal Access Token
           # personal_token: ${{ secrets.PERSONAL_TOKEN }}
-          external_repository: crazyjunichi/csff-wiki-ugc.github.io # 你的Pages仓库
+          external_repository: crazyjunichi/csff-wiki-ugc-public # 你的Pages仓库
           publish_dir: ./public # Hugo默认的输出目录
           publish_branch: main # Pages仓库的分支，通常是main或gh-pages
