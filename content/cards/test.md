@@ -1,3 +1,0 @@
-# Test Card
-
-Description
